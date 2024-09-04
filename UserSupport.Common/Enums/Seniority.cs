@@ -1,4 +1,4 @@
-﻿namespace UserSupport.Enums
+﻿namespace UserSupport.Common.Enums
 {
     public enum Seniority
     {

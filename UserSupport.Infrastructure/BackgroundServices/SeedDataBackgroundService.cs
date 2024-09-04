@@ -1,7 +1,9 @@
-﻿using UserSupport.Model;
-using UserSupport.Services;
+﻿using Microsoft.Extensions.Hosting;
+using UserSupport.Common.Enums;
+using UserSupport.Common.Model;
+using UserSupport.Common.Services;
 
-namespace UserSupport
+namespace UserSupport.Infrastructure.BackgroundServices
 {
     public class SeedDataBackgroundService(IChatService chatService) : BackgroundService
     {
@@ -17,10 +19,10 @@ namespace UserSupport
                     {
                         TeamMembers =
                     [
-                        new() {Id=1,Name="Bilal",Seniority=Enums.Seniority.Lead },
-                        new() {Id=2,Name="Adam",Seniority=Enums.Seniority.MidLevel},
-                        new() {Id=2,Name="Sanad",Seniority=Enums.Seniority.MidLevel },
-                        new() {Id=2,Name="Sid",Seniority=Enums.Seniority.Jonior }
+                        new() {Id=1,Name="Bilal",Seniority=Seniority.Lead },
+                        new() {Id=2,Name="Adam",Seniority=Seniority.MidLevel},
+                        new() {Id=2,Name="Sanad",Seniority=Seniority.MidLevel },
+                        new() {Id=2,Name="Sid",Seniority=Seniority.Jonior }
                     ],
                         Name = "A",
                         ShiftFrom = new TimeOnly(8, 0),
@@ -30,10 +32,10 @@ namespace UserSupport
                     {
                         TeamMembers =
                     [
-                        //new() {Id=1,Name="Dav",Seniority=Enums.Seniority.Senior },
-                        //new() {Id=2,Name="Kavin",Seniority=Enums.Seniority.MidLevel },
-                        //new() {Id=2,Name="John",Seniority=Enums.Seniority.Jonior },
-                        new() {Id=2,Name="Sarah",Seniority=Enums.Seniority.Jonior }
+                        //new() {Id=1,Name="Dav",Seniority=Seniority.Senior },
+                        //new() {Id=2,Name="Kavin",Seniority=Seniority.MidLevel },
+                        //new() {Id=2,Name="John",Seniority=Seniority.Jonior },
+                        new() {Id=2,Name="Sarah",Seniority=Seniority.Jonior }
                     ],
                         Name = "B",
                         ShiftFrom = new TimeOnly(16, 0),
@@ -42,8 +44,8 @@ namespace UserSupport
                     {
                         TeamMembers =
                     [
-                        new() {Id=1,Name="Saed",Seniority=Enums.Seniority.MidLevel },
-                        new() {Id=2,Name="Suzy",Seniority=Enums.Seniority.MidLevel }
+                        new() {Id=1,Name="Saed",Seniority=Seniority.MidLevel },
+                        new() {Id=2,Name="Suzy",Seniority=Seniority.MidLevel }
                     ],
                         Name = "C",
                         ShiftFrom = new TimeOnly(0, 0),
@@ -52,12 +54,12 @@ namespace UserSupport
                     {
                         TeamMembers =
                     [
-                        new() {Id=1,Name="Sam",Seniority=Enums.Seniority.Jonior },
-                        new() {Id=2,Name="Kim",Seniority=Enums.Seniority.Jonior },
-                        new() {Id=2,Name="Andey",Seniority=Enums.Seniority.Jonior },
-                        new() {Id=2,Name="Andrew",Seniority=Enums.Seniority.Jonior },
-                        new() {Id=2,Name="Andreas",Seniority=Enums.Seniority.Jonior },
-                        new() {Id=2,Name="Ezz",Seniority=Enums.Seniority.Jonior }
+                        new() {Id=1,Name="Sam",Seniority=Seniority.Jonior },
+                        new() {Id=2,Name="Kim",Seniority=Seniority.Jonior },
+                        new() {Id=2,Name="Andey",Seniority=Seniority.Jonior },
+                        new() {Id=2,Name="Andrew",Seniority=Seniority.Jonior },
+                        new() {Id=2,Name="Andreas",Seniority=Seniority.Jonior },
+                        new() {Id=2,Name="Ezz",Seniority=Seniority.Jonior }
                     ],
                         Name = "Overflow",
                         ShiftFrom = new TimeOnly(9, 0),

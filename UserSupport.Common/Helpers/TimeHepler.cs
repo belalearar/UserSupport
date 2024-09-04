@@ -1,4 +1,4 @@
-﻿namespace UserSupport.Helpers
+﻿namespace UserSupport.Common.Helpers
 {
     public static class TimeHepler
     {

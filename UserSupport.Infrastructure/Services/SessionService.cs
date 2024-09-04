@@ -1,10 +1,11 @@
 ﻿using Microsoft.Extensions.Options;
 using System.Collections.Concurrent;
-using UserSupport.Configs;
-using UserSupport.Helpers;
-using UserSupport.Model;
+using UserSupport.Common.Configs;
+using UserSupport.Common.Helpers;
+using UserSupport.Common.Model;
+using UserSupport.Common.Services;
 
-namespace UserSupport.Services
+namespace UserSupport.Infrastructure.Services
 {
     public class SessionService(IOptions<SystemProfile> options, IChatService chatService) : ISessionService
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
-using UserSupport.Model;
+using UserSupport.Common.Model;
 
-namespace UserSupport.Services
+namespace UserSupport.Common.Services
 {
     public interface IChatService
     {

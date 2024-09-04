@@ -1,6 +1,4 @@
-﻿using UserSupport.Model;
-
-namespace UserSupport.Services
+﻿namespace UserSupport.Common.Services
 {
     public interface ISessionService
     {

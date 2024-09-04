@@ -1,4 +1,4 @@
-﻿using UserSupport.Enums;
+﻿using UserSupport.Common.Enums;
 
 namespace UserSupport
 {

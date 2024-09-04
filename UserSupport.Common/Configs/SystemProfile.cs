@@ -1,4 +1,4 @@
-﻿namespace UserSupport.Configs
+﻿namespace UserSupport.Common.Configs
 {
     public class SystemProfile
     {

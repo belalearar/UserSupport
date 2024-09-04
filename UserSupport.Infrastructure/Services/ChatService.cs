@@ -1,8 +1,10 @@
 ﻿using System.Collections.Concurrent;
-using UserSupport.Helpers;
-using UserSupport.Model;
+using UserSupport.Common.Enums;
+using UserSupport.Common.Helpers;
+using UserSupport.Common.Model;
+using UserSupport.Common.Services;
 
-namespace UserSupport.Services
+namespace UserSupport.Infrastructure.Services
 {
     public class ChatService() : IChatService
     {
@@ -61,7 +63,7 @@ namespace UserSupport.Services
             foreach (var userName in _queue.Keys.Reverse())
             {
                 var joniorMember = _currentTeam.TeamMembers
-                     .Where(a => a.Seniority is Enums.Seniority.Jonior && a.NumberOfUsers < a.Capicity)
+                     .Where(a => a.Seniority is Seniority.Jonior && a.NumberOfUsers < a.Capicity)
                      .OrderByDescending(a => a.Capicity)
                      .FirstOrDefault();
                 if (joniorMember != null)
@@ -71,7 +73,7 @@ namespace UserSupport.Services
                     return;
                 }
                 var midMember = _currentTeam.TeamMembers
-                     .Where(a => a.Seniority is Enums.Seniority.MidLevel && a.NumberOfUsers < a.Capicity)
+                     .Where(a => a.Seniority is Seniority.MidLevel && a.NumberOfUsers < a.Capicity)
                      .OrderByDescending(a => a.Capicity)
                      .FirstOrDefault();
                 if (midMember != null)
@@ -81,7 +83,7 @@ namespace UserSupport.Services
                     return;
                 }
                 var seniorMember = _currentTeam.TeamMembers
-                     .Where(a => a.Seniority is Enums.Seniority.Senior && a.NumberOfUsers < a.Capicity)
+                     .Where(a => a.Seniority is Seniority.Senior && a.NumberOfUsers < a.Capicity)
                      .OrderByDescending(a => a.Capicity)
                      .FirstOrDefault();
                 if (seniorMember != null)
@@ -92,7 +94,7 @@ namespace UserSupport.Services
                 }
 
                 var leadMember = _currentTeam.TeamMembers
-                    .Where(a => a.Seniority is Enums.Seniority.Lead && a.NumberOfUsers < a.Capicity)
+                    .Where(a => a.Seniority is Seniority.Lead && a.NumberOfUsers < a.Capicity)
                     .OrderByDescending(a => a.Capicity)
                     .FirstOrDefault();
                 if (leadMember != null)

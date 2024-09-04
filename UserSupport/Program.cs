@@ -1,7 +1,9 @@
 using Microsoft.OpenApi.Models;
 using UserSupport;
-using UserSupport.Configs;
-using UserSupport.Services;
+using UserSupport.Common.Configs;
+using UserSupport.Common.Services;
+using UserSupport.Infrastructure.Services;
+using UserSupport.Infrastructure.BackgroundServices;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<ISessionService, SessionService>();

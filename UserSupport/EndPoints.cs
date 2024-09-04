@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics.CodeAnalysis;
-using UserSupport.Services;
+using UserSupport.Common.Services;
 
 namespace UserSupport
 {

@@ -1,6 +1,7 @@
-﻿using UserSupport.Services;
+﻿using Microsoft.Extensions.Hosting;
+using UserSupport.Common.Services;
 
-namespace UserSupport
+namespace UserSupport.Infrastructure.BackgroundServices
 {
     public class UsersMonitorBackgroundService(ISessionService sessionServeic) : BackgroundService
     {

@@ -1,6 +1,6 @@
-﻿using UserSupport.Enums;
+﻿using UserSupport.Common.Enums;
 
-namespace UserSupport.Model
+namespace UserSupport.Common.Model
 {
     public class TeamMember
     {

@@ -1,4 +1,4 @@
-﻿namespace UserSupport.Model
+﻿namespace UserSupport.Common.Model
 {
     public class PollRequest
     {
