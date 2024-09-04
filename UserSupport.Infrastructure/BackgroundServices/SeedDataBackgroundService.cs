@@ -9,7 +9,7 @@ namespace UserSupport.Infrastructure.BackgroundServices
     {
         private readonly List<Team> _teams = [];
         private readonly PeriodicTimer _periodicTimer = new(TimeSpan.FromMinutes(1));
-        private readonly Team? _currentTeam;
+        private readonly Team? _currentTeam = null;
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             do

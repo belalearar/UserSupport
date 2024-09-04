@@ -70,10 +70,6 @@ namespace UserSupport.Infrastructure.Services
                 {
                     joniorMember.NumberOfUsers++;
                     _queue.Remove(userName, out _);
-                    if (joniorMember.NumberOfUsers == joniorMember.Capicity)
-                    {
-
-                    }
                     return;
                 }
                 var midMember = _currentTeam.TeamMembers

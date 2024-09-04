@@ -1,6 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Net.Http.Json;
-using System.Runtime.CompilerServices;
+using UserSupport.Common.Helpers;
 using UserSupport.Common.Model;
 
 namespace UserSupport.IntegrationTest
@@ -41,17 +41,22 @@ namespace UserSupport.IntegrationTest
             var client = application.CreateClient();
 
             var teamResponseMessage = await client.GetAsync("team-on-shift");
+            var overflowTeamResponseMessage = await client.GetAsync("team-overflow");
 
             var team = await teamResponseMessage.Content.ReadFromJsonAsync<Team>();
+            var overflowTeam = await overflowTeamResponseMessage.Content.ReadFromJsonAsync<Team>();
 
-            for (int i = 0; i <= (team!.QueueSize + team.Capacity); i++)
+            var isDuringWorkingHours = TimeHepler.DuringWorkingHours();
+
+            var overflowCapacity = (isDuringWorkingHours && overflowTeam != null) ? overflowTeam?.Capacity : 0;
+            for (int i = 0; i <= (team!.QueueSize + team.Capacity + overflowCapacity); i++)
             {
                 var userName = "AliAAA" + DateTime.Now.ToString();
                 var responseMessage = await client.PostAsJsonAsync("/create-session", userName);
 
                 responseMessage.EnsureSuccessStatusCode();
 
-                if (i > team.Capacity)
+                if (i > team.Capacity + overflowCapacity)
                 {
                     await Task.Delay(2000);
                     await client.PostAsJsonAsync("/poll", userName);
@@ -71,17 +76,23 @@ namespace UserSupport.IntegrationTest
             var client = application.CreateClient();
 
             var teamResponseMessage = await client.GetAsync("team-on-shift");
+            var overflowTeamResponseMessage = await client.GetAsync("team-overflow");
 
             var team = await teamResponseMessage.Content.ReadFromJsonAsync<Team>();
+            var overflowTeam = await overflowTeamResponseMessage.Content.ReadFromJsonAsync<Team>();
 
-            for (int i = 0; i <= (team!.QueueSize + team.Capacity); i++)
+            var isDuringWorkingHours = TimeHepler.DuringWorkingHours();
+
+            var overflowCapacity = (isDuringWorkingHours && overflowTeam != null) ? overflowTeam?.Capacity : 0;
+
+            for (int i = 0; i <= (team!.QueueSize + team.Capacity + overflowCapacity); i++)
             {
                 var userName = "AliAAA" + DateTime.Now.ToString();
                 var responseMessage = await client.PostAsJsonAsync("/create-session", userName);
 
                 responseMessage.EnsureSuccessStatusCode();
 
-                if (i > team.Capacity)
+                if (i > team.Capacity + overflowCapacity)
                 {
                     await Task.Delay(5000);
                     await client.PostAsJsonAsync("/poll", userName);
@@ -105,7 +116,7 @@ namespace UserSupport.IntegrationTest
 
             var team = await teamResponseMessage.Content.ReadFromJsonAsync<Team>();
 
-            Assert.Equal(team.Capacity * 1.5, team.QueueSize);
+            Assert.Equal(team!.Capacity * 1.5, team.QueueSize);
         }
     }
 }
