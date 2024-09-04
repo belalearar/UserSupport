@@ -23,7 +23,7 @@ namespace UserSupport.Infrastructure.Services
             }
             else if (queue.Count >= currentTeam.QueueSize && duringWorkingHours)
             {
-                var isAvailable = CheckOverflowTeamAvailability(userName, currentTeam, queue);
+                var isAvailable = CheckOverflowTeamAvailability(userName, currentTeam);
                 if (!isAvailable) { return false; }
             }
             //Add
@@ -32,7 +32,7 @@ namespace UserSupport.Infrastructure.Services
             return true;
         }
 
-        private bool CheckOverflowTeamAvailability(string userName, Team currentTeam, ConcurrentDictionary<string, DateTime> queue)
+        private bool CheckOverflowTeamAvailability(string userName, Team currentTeam)
         {
             var overflowTeam = chatService.GetOverflowTeam();
             var maxCapacity = currentTeam.QueueSize + overflowTeam.Capacity;

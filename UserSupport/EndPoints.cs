@@ -11,6 +11,10 @@ namespace UserSupport
         {
             app.MapPost("create-session", CreateSession);
             app.MapPost("poll", Poll);
+
+            app.MapGet("queue", GetQueue);
+            app.MapGet("team-on-shift", GetCurrentTeam);
+            app.MapGet("team-overflow", GetOverflowTeam);
         }
 
         static IResult CreateSession([FromBody] string userName, ISessionService sessionServeic, CancellationToken cancellationToken)
@@ -23,6 +27,24 @@ namespace UserSupport
         {
             sessionServeic.Poll(userName);
             return Results.NoContent();
+        }
+
+        static IResult GetQueue(IChatService chatService, CancellationToken cancellationToken)
+        {
+            var queue = chatService.GetQueue();
+            return Results.Ok(queue);
+        }
+
+        static IResult GetCurrentTeam(IChatService chatService, CancellationToken cancellationToken)
+        {
+            var queue = chatService.GetOnShiftTeam();
+            return Results.Ok(queue);
+        }
+
+        static IResult GetOverflowTeam(IChatService chatService, CancellationToken cancellationToken)
+        {
+            var queue = chatService.GetOverflowTeam();
+            return Results.Ok(queue);
         }
     }
 }

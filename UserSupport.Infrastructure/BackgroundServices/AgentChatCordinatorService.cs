@@ -5,14 +5,13 @@ namespace UserSupport.Infrastructure.BackgroundServices
 {
     public class AgentChatCordinatorService(IChatService chatService) : BackgroundService
     {
-        private readonly PeriodicTimer periodicTimer = new(TimeSpan.FromSeconds(10));
+        private readonly PeriodicTimer periodicTimer = new(TimeSpan.FromSeconds(1));
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            do
+            while (!stoppingToken.IsCancellationRequested && await periodicTimer.WaitForNextTickAsync(stoppingToken))
             {
                 chatService.PickAndAssignToAgent();
             }
-            while (!stoppingToken.IsCancellationRequested && await periodicTimer.WaitForNextTickAsync());
         }
     }
 }

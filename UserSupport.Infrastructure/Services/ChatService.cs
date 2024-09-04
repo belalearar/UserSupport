@@ -9,7 +9,6 @@ namespace UserSupport.Infrastructure.Services
     public class ChatService() : IChatService
     {
         private readonly ConcurrentDictionary<string, DateTime> _queue = [];
-        private readonly ConcurrentDictionary<string, Team> _teams = [];
         private Team _currentTeam = null!;
         private Team _overflowTeam = null!;
 
@@ -27,6 +26,7 @@ namespace UserSupport.Infrastructure.Services
         public void AddToQueue(string userName)
         {
             _queue[userName] = DateTime.UtcNow;
+            PickAndAssignToAgent();
         }
 
         public void UpdateQueue(string userName)
@@ -70,6 +70,10 @@ namespace UserSupport.Infrastructure.Services
                 {
                     joniorMember.NumberOfUsers++;
                     _queue.Remove(userName, out _);
+                    if (joniorMember.NumberOfUsers == joniorMember.Capicity)
+                    {
+
+                    }
                     return;
                 }
                 var midMember = _currentTeam.TeamMembers

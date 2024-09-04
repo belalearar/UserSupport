@@ -8,7 +8,8 @@ namespace UserSupport.Infrastructure.BackgroundServices
     public class SeedDataBackgroundService(IChatService chatService) : BackgroundService
     {
         private readonly List<Team> _teams = [];
-        private readonly PeriodicTimer _periodicTimer = new PeriodicTimer(TimeSpan.FromMinutes(1));
+        private readonly PeriodicTimer _periodicTimer = new(TimeSpan.FromMinutes(1));
+        private readonly Team? _currentTeam;
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             do
@@ -32,9 +33,9 @@ namespace UserSupport.Infrastructure.BackgroundServices
                     {
                         TeamMembers =
                     [
-                        //new() {Id=1,Name="Dav",Seniority=Seniority.Senior },
-                        //new() {Id=2,Name="Kavin",Seniority=Seniority.MidLevel },
-                        //new() {Id=2,Name="John",Seniority=Seniority.Jonior },
+                        new() {Id=1,Name="Dav",Seniority=Seniority.Senior },
+                        new() {Id=2,Name="Kavin",Seniority=Seniority.MidLevel },
+                        new() {Id=2,Name="John",Seniority=Seniority.Jonior },
                         new() {Id=2,Name="Sarah",Seniority=Seniority.Jonior }
                     ],
                         Name = "B",
@@ -72,7 +73,10 @@ namespace UserSupport.Infrastructure.BackgroundServices
                     }
                 }
                 var currentTeam = _teams.First(a => !a.Name.Equals("Overflow") && TimeOnly.FromDateTime(DateTime.UtcNow) > a.ShiftFrom && TimeOnly.FromDateTime(DateTime.UtcNow) < a.ShiftTo);
-                chatService.SetOnShiftTeam(currentTeam);
+                if (_currentTeam == null || !currentTeam.Name.Equals(_currentTeam.Name))
+                {
+                    chatService.SetOnShiftTeam(currentTeam);
+                }
             } while (!stoppingToken.IsCancellationRequested && await _periodicTimer.WaitForNextTickAsync(stoppingToken));
         }
     }

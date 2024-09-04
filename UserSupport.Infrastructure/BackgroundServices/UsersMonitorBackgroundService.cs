@@ -5,13 +5,13 @@ namespace UserSupport.Infrastructure.BackgroundServices
 {
     public class UsersMonitorBackgroundService(ISessionService sessionServeic) : BackgroundService
     {
-        private PeriodicTimer timer = new(TimeSpan.FromMilliseconds(300));
+        private readonly PeriodicTimer _timer = new(TimeSpan.FromMilliseconds(1000));
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             do
             {
                 sessionServeic.MonitorUsers();
-            } while (!stoppingToken.IsCancellationRequested && await timer.WaitForNextTickAsync(stoppingToken));
+            } while (!stoppingToken.IsCancellationRequested && await _timer.WaitForNextTickAsync(stoppingToken));
         }
     }
 }
