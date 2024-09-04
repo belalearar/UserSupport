@@ -10,3 +10,5 @@
 /UserSupport.Common/obj
 /UserSupport.Infrastructure/bin/Debug/net8.0
 /UserSupport.Infrastructure/obj
+/UserSupport.Test/bin/Debug/net8.0
+/UserSupport.Test/obj
