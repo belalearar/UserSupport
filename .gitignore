@@ -6,3 +6,7 @@
 /UserSupport/obj
 /UserSupport/appsettings.Development.json
 /.vs
+/UserSupport.Common/bin/Debug/net8.0
+/UserSupport.Common/obj
+/UserSupport.Infrastructure/bin/Debug/net8.0
+/UserSupport.Infrastructure/obj
