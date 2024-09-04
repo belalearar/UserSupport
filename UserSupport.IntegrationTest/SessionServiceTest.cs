@@ -92,5 +92,20 @@ namespace UserSupport.IntegrationTest
                 }
             }
         }
+
+
+        [Fact]
+        // Test Team Queue Capacity Should Be Team Capacity * 1.5
+        public async Task CheckTeamQueueCapacity_ShouldTeamQueueCapacity()
+        {
+            var application = new UserSupportWebAppFactory();
+            var client = application.CreateClient();
+
+            var teamResponseMessage = await client.GetAsync("team-on-shift");
+
+            var team = await teamResponseMessage.Content.ReadFromJsonAsync<Team>();
+
+            Assert.Equal(team.Capacity * 1.5, team.QueueSize);
+        }
     }
 }
