@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\UserSupport.Common\UserSupport.Common.csproj" />
     <ProjectReference Include="..\UserSupport.Infrastructure\UserSupport.Infrastructure.csproj" />
   </ItemGroup>
 
